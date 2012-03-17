@@ -2,7 +2,7 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
-    Movie.create!(movie) if Movie.find_by_title_and_rating_and_release_date(movie[:title], movie[:rating], movie[:release_date]) == nil
+    Movie.create!(movie) if !Movie.exists?(movie)
   end
 end
 
@@ -23,4 +23,8 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  rating_list = rating_list.split ","
+  rating_list.split do |x|
+    When %Q{I #{uncheck}check "#{x}"}
+  end
 end
