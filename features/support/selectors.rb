@@ -15,6 +15,10 @@ module HtmlSelectorsHelpers
 
     when "the page"
       "html > body"
+    when "rating column in movies table"
+      [:xpath, "//table[@id='movies']/tbody/tr/td[2]"]
+    when "movies"
+      [:xpath, "//table[@id='movies']"]
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
