@@ -32,8 +32,14 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I press "Refresh"
 
   # enter step(s) to ensure that PG and R movies are visible
-  Then I should see "R" within rating column in movies table
+  Then I should see /^R$/ within movies
+  And I should see /^PG$/ within movies
+
   # enter step(s) to ensure that other movies are not visible
+  And I should not see /^G$/ within movies
+  And I should not see /^PG-13$/ within movies
+  And I should not see /^NC-17$/ within movies
+
 
 Scenario: no ratings selected
   #When I uncheck the following ratings: PG, R, G, PG-13, NC-17
@@ -41,6 +47,6 @@ Scenario: no ratings selected
   #Then I should not see all the movies
 
 Scenario: all ratings selected
-  #When I check the following ratings: PG, R, G, PG-13, NC-17
-  #And I press "Refresh"
-  #Then I should see all the movies
+  When I check the following ratings: PG, R, G, PG-13, NC-17
+  And I press "Refresh"
+  Then I should see all the movies

@@ -16,6 +16,9 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
 end
 
 Then /I should see all the movies/ do
+  with_scope("movies") do
+    #page.
+  end
   Movie.count
   assert false, "Unimplmemented"
 end

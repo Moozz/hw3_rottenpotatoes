@@ -103,7 +103,6 @@ When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  debugger
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -131,7 +130,7 @@ end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   regexp = Regexp.new(regexp)
-
+  p page.text
   if page.respond_to? :should
     page.should have_no_xpath('//*', :text => regexp)
   else
